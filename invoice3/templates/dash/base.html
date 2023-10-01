@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- Mirrored from kanakku.dreamguystech.com/html/template-materializecss/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 Sep 2023 14:01:31 GMT -->
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0"/>
+    <title>ITcoln company</title>
+
+    <link rel="shortcut icon" href="{% static 'assets_dash/img/favicon.png' %}"/>
+
+    <link rel="stylesheet" href="{% static 'assets_dash/css/materialize.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'assets_dash/css/materialize-custom.css' %}"/>
+
+    <link rel="stylesheet" href="{% static 'assets_dash/plugins/fontawesome/css/fontawesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'assets_dash/plugins/fontawesome/css/all.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'assets_dash/plugins/select2/css/select2.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets_dash/plugins/datatables/datatables.min.css' %}">
+    {% block css %}
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'assets_dash/css/style.css' %}"/>
+</head>
+
+<body class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme">
+
+<div class="header header-one">
+    <div class="header-left header-left-one">
+        <a href="{% url 'dashboard' %}" class="logo">
+            <img src="{% static 'assets_dash/img/TIL logo without background.png' %}" alt="Logo"/>
+        </a>
+        <a href="{% url 'dashboard' %}" class="white-logo">
+            <img src="{% static 'assets_dash/img/TIL logo without background.png' %}" alt="Logo"/>
+        </a>
+        <a href="{% url 'dashboard' %}" class="logo logo-small">
+            <img src="{% static 'assets_dash/img/TIL logo without background.png' %}" alt="Logo" width="30"
+                 height="30"/>
+        </a>
+    </div>
+
+    <a href="javascript:void(0);" id="toggle_btn">
+        <i class="fas fa-bars"></i>
+    </a>
+
+    <div class="top-nav-search">
+        <form>
+            <input type="text" class="form-control" placeholder="Search here"/>
+            <button class="btn" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+
+
+    <ul class="nav nav-tabs user-menu">
+        <li class="nav-item dropdown has-arrow main-drop">
+            <a href="#" class="dropdown-toggle dropdown-trigger nav-link" data-target="dropdown-profile">
+                        <span class="user-img">
+                <img src="{% static 'assets_dash/img/profiles/avatar-01.jpg' %}" alt/>
+                <span class="status online"></span>
+                        </span>
+                <span>Admin</span>
+            </a>
+            <div id="dropdown-profile" class="dropdown-content dropdown-menu">
+                <a class="dropdown-item" href="profile.html">
+                    <i data-feather="user" class="me-1"></i> Profile
+                </a>
+
+                <a class="dropdown-item" href="{% url 'logout' %}">
+                    <i data-feather="log-out" class="me-1"></i> Logout
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+            <ul>
+                <li class="menu-title"><span>Main</span></li>
+                <li>
+                    <a href="{% url 'dashboard' %}">
+                        <i data-feather="home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'clients' %}">
+                        <i data-feather="users"></i>
+                        <span>CRM</span>
+                    </a>
+                </li>
+
+                <li class="submenu">
+                    <a href="#">
+                        <i data-feather="clipboard"></i>
+                        <span>Invoices</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul>
+                        <li><a href="{% url 'invoices' %}">Invoices List</a></li>
+
+                        <li><a href="{% url 'invoices' %}">Add Invoices</a></li>
+
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">
+                        <i data-feather="star"></i>
+                        <span>Purchase orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i data-feather="pie-chart"></i>
+                        <span>Data Report</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i data-feather="grid"></i>
+                        <span>Calender</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="profile.html">
+                        <i data-feather="user-plus"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="users.html">
+                        <i data-feather="user"></i>
+                        <span>Users</span>
+                    </a>
+
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% block main %}
+
+
+{% endblock %}
+
+
+
+<script src="{% static 'assets_dash/js/jquery-3.6.1.min.js' %}"></script>
+
+<script src="{% static 'assets_dash/js/materialize.min.js' %}"></script>
+
+<script src="{% static 'assets_dash/js/feather.min.js' %}"></script>
+
+<script src="{% static 'assets_dash/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+<script src="{% static 'assets_dash/plugins/apexchart/apexcharts.min.js' %}"></script>
+<script src="{% static 'assets_dash/plugins/apexchart/chart-data.js' %}"></script>
+ <script src="{% static 'assets_dash/plugins/select2/js/select2.min.js' %}"></script>
+
+    <script src="{% static 'assets_dash/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assets_dash/plugins/datatables/datatables.min.js' %}"></script>
+
+    <script src="{% static 'assets_dash/plugins/moment/moment.min.js' %}"></script>
+
+<script src="{% static 'assets_dash/js/script.js' %}"></script>
+{% block scripts %}
+{% endblock %}
+</body>
+
+</html>

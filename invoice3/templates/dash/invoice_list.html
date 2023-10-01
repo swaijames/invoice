@@ -1,0 +1,70 @@
+{% extends 'dash/base.html' %}
+{% load static %}
+
+{% block main %}
+
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+
+            <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="colEmpty">
+                        <h3 class="page-title">Invoices</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Invoices</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <div class="card card-table">
+                        <div class="card-body">
+                            <div class="responsive-table">
+                                <table class="table table-stripped table-hover datatable">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th>#invoiceID</th>
+                                        <th>Title</th>
+                                        <th>Client name</th>
+                                        <th>Phone Number</th>
+                                        <th>Due Date</th>
+                                        <th>Invoice Status</th>
+                                        <th>Delete</th>
+                                        <th>View</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for invoice in invoices %}
+                                        <tr>
+                                            <td>
+                                                <label class="custom_check">
+                                                    <input type="checkbox" name="invoice">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <a href="view-invoice.html" class="invoice-link">{{invoice.number}}</a>
+                                            </td>
+                                            <td>{{invoice.title}}</td>
+                                            <td>{{invoice.client.clientName}}</td>
+                                            <td>
+                                                {{invoice.client.phoneNumber}}
+                                            </td>
+                                            <td class="text-primary">{{invoice.dueDate}}</td>
+                                            <td> <span class="badge bg-primary-light">{{invoice.status}}</span></td>
+                                            <td><a href="{% url 'delete-invoice' invoice.slug %}"><button class="btn btn-danger"> DELETE </button></a></td>
+                                            <td>  <a href="{% url 'create-build-invoice' invoice.slug %}"><button class="btn btn-primary"> VIEW </button></a> </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
