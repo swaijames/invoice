@@ -89,7 +89,7 @@ class InvoiceForm(forms.ModelForm):
                 css_class='form-row'),
             'notes',
 
-            Submit('submit', ' EDIT INVOICE '))
+            Submit('submit', ' ADD INVOICE '))
 
     class Meta:
         model = Invoice

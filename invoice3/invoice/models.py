@@ -8,9 +8,9 @@ from django.contrib.auth.models import User
 
 class Client(models.Model):
     PROVINCES = [
-        ('Gauteng', 'Gauteng'),
-        ('Free State', 'Free State'),
-        ('Limpopo', 'Limpopo'),
+        ('dar es salaam', 'DAR'),
+        ('Arusha', 'Arusha'),
+        ('Dodoma', 'Dodoma'),
     ]
 
     # Basic Fields.

@@ -166,7 +166,7 @@ def createBuildInvoice(request, slug):
         context['prod_form'] = prod_form
         context['inv_form'] = inv_form
         context['client_form'] = client_form
-        return render(request, 'invoice/create-invoice.html', context)
+        return render(request, 'dash/add_invoice.html', context)
 
     if request.method == 'POST':
         prod_form = ProductForm(request.POST)
@@ -381,6 +381,14 @@ def deleteInvoice(request, slug):
         return redirect('invoices')
 
     return redirect('invoices')
+
+
+def deleteclient(request, slug):
+    try:
+        Client.objects.get(slug=slug).delete()
+    except:
+        messages.error(request, 'Something went wrong')
+        return redirect('clients')
 
 
 def companySettings(request):

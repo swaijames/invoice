@@ -16,6 +16,9 @@ urlpatterns = [
     # Delete an invoice
     path('invoices/delete/<slug:slug>', views.deleteInvoice, name='delete-invoice'),
 
+    # delete client
+    path('client/delete/<slug:slug>', views.deleteclient, name='delete-client'),
+
     # PDF and EMAIL Paths
     path('invoices/view-pdf/<slug:slug>', views.viewPDFInvoice, name='view-pdf-invoice'),
     path('invoices/view-document/<slug:slug>', views.viewDocumentInvoice, name='view-document-invoice'),

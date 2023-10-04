@@ -1,5 +1,3 @@
-
-
 (function ($) {
     "use strict";
 
@@ -46,7 +44,11 @@
     });
 
     // Sidebar overlay
-
+    $(".sidebar-overlay").on("click", function () {
+        $wrapper.removeClass('slide-nav');
+        $(".sidebar-overlay").removeClass("opened");
+        $('html').removeClass('menu-opened');
+    });
 
     // Page Content Height
     if ($('.page-wrapper').length > 0) {
@@ -183,7 +185,20 @@
     });
 
     // Small Sidebar
-
+    $(document).on('click', '#toggle_btn', function () {
+        if ($('body').hasClass('mini-sidebar')) {
+            $('body').removeClass('mini-sidebar');
+            $('.subdrop + ul').slideDown();
+        } else {
+            $('body').addClass('mini-sidebar');
+            $('.subdrop + ul').slideUp();
+        }
+        setTimeout(function () {
+            mA.redraw();
+            mL.redraw();
+        }, 300);
+        return false;
+    });
 
     $(document).on('mouseover', function (e) {
         e.stopPropagation();
@@ -327,6 +342,24 @@
 
     // Chat
 
+    var chatAppTarget = $('.chat-window');
+    (function () {
+        if ($(window).width() > 991)
+            chatAppTarget.removeClass('chat-slide');
+
+        $(document).on("click", ".chat-window .chat-users-list a.media", function () {
+            if ($(window).width() <= 991) {
+                chatAppTarget.addClass('chat-slide');
+            }
+            return false;
+        });
+        $(document).on("click", "#back_user_list", function () {
+            if ($(window).width() <= 991) {
+                chatAppTarget.removeClass('chat-slide');
+            }
+            return false;
+        });
+    })();
 
     // Checkbox Select
 
@@ -410,8 +443,433 @@
         return false;
     });
 
+    $(document).on("click", ".add-btn", function () {
+        var experiencecontent = '<tr class="add-row">' +
+            '<td>' +
+            '<input type="text" class="form-control">' +
+            '</td>' +
+            '<td>' +
+            '<input type="text" class="form-control">' +
+            '</td>' +
+            '<td>' +
+            '<input type="text" class="form-control">' +
+            '</td>' +
+            '<td>' +
+            '<input type="text" class="form-control">' +
+            '</td>' +
+            '<td>' +
+            '<input type="text" class="form-control">' +
+            '</td>' +
+            '<td>' +
+            '<input type="text" class="form-control">' +
+            '</td>' +
+            '<td class="add-remove right-align">' +
+            '<a href="javascript:void(0);" class="add-btn me-2"><i class="fas fa-plus-circle"></i></a> ' +
+            '<a href="#" class="copy-btn me-2"><i class="fe fe-copy"></i></a>' +
+            '<a href="javascript:void(0);" class="remove-btn"><i class="fe fe-trash-2"></i></a>' +
+            '</td>' +
+            '</tr>';
 
+        $(".add-table-items").append(experiencecontent);
+        return false;
+    });
 
+    var right_side_views = '<div class="right-side-views">' +
+        '<ul class="sticky-sidebar siderbar-view">' +
+        '<li class="sidebar-icons">' +
+        '<a class="toggle tipinfo open-layout open-siderbar" href="#" data-toggle="tooltip" data-placement="left" data-bs-original-title="Tooltip on left">' +
+        '<div class="tooltip-five ">' +
+        '<img src="assets/img/icons/siderbar-icon1.svg" class="feather-five" alt="">' +
+        '<span class="tooltiptext">Check Layout</span>' +
+        '</div>' +
+        '</a>' +
+        '</li>' +
+        '<li class="sidebar-icons">' +
+        '<a class="toggle tipinfo open-settings open-siderbar" href="#" data-toggle="tooltip" data-placement="left" data-bs-original-title="Tooltip on left">' +
+        '<div class="tooltip-five">' +
+        '<img src="assets/img/icons/siderbar-icon2.svg" class="feather-five" alt="">' +
+        '<span class="tooltiptext">Demo Settings</span>' +
+        '</div>' +
+        '</a>' +
+        '</li>' +
+        '<li class="sidebar-icons">' +
+        '<a class="toggle tipinfo" target="_blank" href="https://themeforest.net/item/kanakku-bootstrap-admin-html-template/29436291?s_rank=11" data-toggle="tooltip" data-placement="left" title="Tooltip on left">' +
+        '<div class="tooltip-five">' +
+        '<img src="assets/img/icons/siderbar-icon3.svg" class="feather-five" alt="">' +
+        '<span class="tooltiptext">Buy Now</span>' +
+        '</div>' +
+        '</a>' +
+        '</li>' +
+        '</ul>' +
+        '</div>' +
+
+        '<div class="sidebar-layout">' +
+        '<div class="sidebar-content">' +
+        '<div class="sidebar-top">' +
+        '<div class="container-fluid">' +
+        '<div class="row align-items-center">' +
+        '<div class="col s12 xl6 s6 ">' +
+        '<div class="sidebar-logo">' +
+        '<a href="index.html" class="logo">' +
+        '<img src="assets/img/logo.png" alt="Logo" class="img-flex">' +
+        '</a>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col s12 xl6 s6 ">' +
+        '<a class="btn-closed" href="#"><img class="img-fliud" src="assets/img/icons/sidebar-delete-icon.svg" alt="demo"></a>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="container-fluid">' +
+        '<div class="row align-items-center">' +
+        '<h5 class="sidebar-title">Choose layout</h5>' +
+        '<div class="col s12 xl6 s6 ">' +
+        '<div class="sidebar-image align-center">' +
+        '<img class="img-fliud" src="assets/img/demo-one.png" alt="demo">' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col s12 m6 layout">' +
+        '<h5 class="layout-title">Demo 1</h5>' +
+        '</div>' +
+        '<div class="col s12 m6 layout">' +
+        '<label class="switch">' +
+        '<a href="../template-materializecss/index.html" class="layout-link"></a>' +
+        '<span class="slider round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col s12 xl6 s6 ">' +
+        '<div class="sidebar-image align-center">' +
+        '<img class="img-fliud" src="assets/img/demo-two.png" alt="demo">' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col s12 m6 layout">' +
+        '<h5 class="layout-title">Demo 2</h5>' +
+        '</div>' +
+        '<div class="col s12 m6 layout">' +
+        '<label class="switch">' +
+        '<a href="index-two.html" class="layout-link"></a>' +
+        '<span class="slider round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="row align-items-center">' +
+        '<h5 class="sidebar-title">Choose layout</h5>' +
+        '<div class="col s12 xl6 s6 ">' +
+        '<div class="sidebar-image align-center">' +
+        '<img class="img-fliud" src="assets/img/demo-three.png" alt="demo">' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col s12 m6 layout">' +
+        '<h5 class="layout-title">Demo 3</h5>' +
+        '</div>' +
+        '<div class="col s12 m6 layout">' +
+        '<label class="switch">' +
+        '<a href="index-three.html" class="layout-link"></a>' +
+        '<span class="slider round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col s12 xl6 s6 ">' +
+        '<div class="sidebar-image align-center">' +
+        '<img class="img-fliud" src="assets/img/demo-four.png" alt="demo">' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col s12 m6 layout">' +
+        '<h5 class="layout-title">Demo 4</h5>' +
+        '</div>' +
+        '<div class="col s12 m6 layout">' +
+        '<label class="switch">' +
+        '<a href="index-four.html" class="layout-link"></a>' +
+        '<span class="slider round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="row align-items-center">' +
+        '<div class="col s12 xl6 s6 ml-0">' +
+        '<div class="sidebar-image align-center">' +
+        '<img class="img-fliud" src="assets/img/demo-five.png" alt="demo">' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col s12 m6 layout">' +
+        '<h5 class="layout-title">Demo 5</h5>' +
+        '</div>' +
+        '<div class="col s12 m6 layout">' +
+        '<label class="switch">' +
+        '<a href="index-five.html" class="layout-link"></a>' +
+        '<span class="slider round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="row align-items-center">' +
+        '<div class="reset-page center-align">' +
+        '<a href="index.html">' +
+        '<button type="button" class="sidebar-but"><img src="assets/img/icons/reset-icon.svg" alt="reset" class="reset-icon">' +
+        '<span>Reset Settings</span>' +
+        '</button>' +
+        '</a>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+
+        '<div class="sidebar-settings">' +
+        '<div class="sidebar-content sticky-sidebar-one">' +
+        '<div class="sidebar-top">' +
+        '<div class="container-fluid">' +
+        '<div class="row align-items-center ">' +
+        '<div class="col s12 xl6 s6 ">' +
+        '<div class="sidebar-logo">' +
+        '<a href="index.html" class="logo">' +
+        '<img src="assets/img/logo.png" alt="Logo" class="img-flex">' +
+        '</a>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col s12 xl6 s6 ">' +
+        '<a class="btn-closed" href="#"><img class="img-fliud" src="assets/img/icons/sidebar-delete-icon.svg" alt="demo"></a>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="container-fluid">' +
+        '<div class="row align-items-center ">' +
+        '<h5 class="sidebar-title">Preview Setting</h5>' +
+        '<h5 class="sidebar-sub-title">Layout Type</h5>' +
+        '<div class="col s12 m6 xl3 ml-0">' +
+        '<div class="sidebar-image-one align-center">' +
+        '<img class="img-fliud" src="assets/img/layout-one.png" alt="layout">' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col s6 l6 setting">' +
+        '<h5 class="setting-title">LTR</h5>' +
+        '</div>' +
+        '<div class="col s6 l6 setting">' +
+        '<label class="switch switch-one">' +
+        '<a href="../template-materializecss/index.html" class="layout-link"></a>' +
+        '<span class="slider slider-one round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col s12 m6 xl3 ml-0">' +
+        '<div class="sidebar-image-one align-center">' +
+        '<img class="img-fliud" src="assets/img/layout-two.png" alt="layout">' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col s6 l6 setting">' +
+        '<h5 class="setting-title">RTL</h5>' +
+        '</div>' +
+        '<div class="col s6 l6 setting">' +
+        '<label class="switch switch-one">' +
+        '<a href="../template-materializecss-rtl/index.html" class="layout-link"></a>' +
+        '<span class="slider slider-one round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col s12 m6 xl3 ml-0">' +
+        '<div class="sidebar-image-one align-center">' +
+        '<img class="img-fliud" src="assets/img/layout-three.png" alt="layout">' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col s6 l6 setting">' +
+        '<h5 class="setting-title">BOX</h5>' +
+        '</div>' +
+        '<div class="col s6 l6 setting">' +
+        '<label class="switch switch-one">' +
+        '<a href="index-three.html" class="layout-link"></a>' +
+        '<span class="slider slider-one round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="row align-items-center ">' +
+        '<h5 class="sidebar-sub-title">Sidebar Type</h5>' +
+        '<div class="col s12 m6 xl3 ml-0">' +
+        '<div class="sidebar-image-one align-center">' +
+        '<img src="assets/img/layout-four.png" alt="layout">' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col s6 l6 setting">' +
+        '<h5 class="setting-title">Normal</h5>' +
+        '</div>' +
+        '<div class="col s6 l6 setting">' +
+        '<label class="switch switch-one">' +
+        '<a href="index-two.html" class="layout-link"></a>' +
+        '<span class="slider slider-one round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col s12 m6 xl3 ml-0">' +
+        '<div class="sidebar-image-one align-center">' +
+        '<img src="assets/img/layout-five.png" alt="layout">' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col s6 l6 setting">' +
+        '<h5 class="setting-title">Compact</h5>' +
+        '</div>' +
+        '<div class="col s6 l6 setting">' +
+        '<label class="switch switch-one">' +
+        '<a href="index-five.html" class="layout-link"></a>' +
+        '<span class="slider slider-one round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="row align-items-center">' +
+        '<h5 class="sidebar-sub-title">Header & Sidebar Style</h5>' +
+        '<div class="col s12 m6 xl3 ">' +
+        '<div class="sidebar-color align-center">' +
+        '<span class="color-one"></span>' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col setting">' +
+        '<h5 class="setting-title">White</h5>' +
+        '</div>' +
+        '<div class="col-auto setting">' +
+        '<label class="switch switch-one sidebar-type-two">' +
+        '<input type="checkbox">' +
+        '<span class="slider slider-one round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col s12 m6 xl3 ">' +
+        '<div class="sidebar-color align-center">' +
+        '<span class="color-two"></span>' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col setting">' +
+        '<h5 class="setting-title">Lite</h5>' +
+        '</div>' +
+        '<div class="col-auto setting">' +
+        '<label class="switch switch-one sidebar-type-three">' +
+        '<input type="checkbox">' +
+        '<span class="slider slider-one round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col s12 m6 xl3 ">' +
+        '<div class="sidebar-color align-center">' +
+        '<span class="color-three"></span>' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col setting">' +
+        '<h5 class="setting-title">Dark</h5>' +
+        '</div>' +
+        '<div class="col-auto setting">' +
+        '<label class="switch switch-one sidebar-type-four">' +
+        '<input type="checkbox">' +
+        '<span class="slider slider-one round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col s12 m6 xl3 ">' +
+        '<div class="sidebar-color align-center">' +
+        '<span class="color-eight"></span>' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col setting">' +
+        '<h5 class="setting-title">Theme</h5>' +
+        '</div>' +
+        '<div class="col-auto setting">' +
+        '<label class="switch switch-one sidebar-type-five">' +
+        '<input type="checkbox">' +
+        '<span class="slider slider-one round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="row align-items-center">' +
+        '<h5 class="sidebar-sub-title">Primary Skin</h5>' +
+        '<div class="col s12 m6 xl6 ">' +
+        '<div class="sidebar-color-one align-center">' +
+        '<span class="color-five"></span>' +
+        '<span class="color-four"></span>' +
+        '<span class="color-six"></span>' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col s6 l6 setting">' +
+        '<h5 class="setting-title">Theme</h5>' +
+        '</div>' +
+        '<div class="col s6 l6 setting">' +
+        '<label class="switch switch-one primary-skin-one">' +
+        '<input type="checkbox">' +
+        '<span class="slider slider-one round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col s12 m6 xl6 ">' +
+        '<div class="sidebar-color-one align-center">' +
+        '<span class="color-five"></span>' +
+        '<span class="color-two"></span>' +
+        '<span class="color-six"></span>' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col s6 l6 setting">' +
+        '<h5 class="setting-title">Lite</h5>' +
+        '</div>' +
+        '<div class="col s6 l6 setting">' +
+        '<label class="switch switch-one primary-skin-two">' +
+        '<input type="checkbox">' +
+        '<span class="slider slider-one round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col s12 m6 xl6 ml-0">' +
+        '<div class="sidebar-color-one align-center">' +
+        '<span class="color-three"></span>' +
+        '<span class="color-four"></span>' +
+        '<span class="color-seven"></span>' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="col s6 l6 setting">' +
+        '<h5 class="setting-title">Dark</h5>' +
+        '</div>' +
+        '<div class="col s6 l6 setting">' +
+        '<label class="switch switch-one primary-skin-three">' +
+        '<input type="checkbox">' +
+        '<span class="slider slider-one round"></span>' +
+        '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="row align-items-center ">' +
+        '<div class="col-xl-12 col s12">' +
+        '<div class="reset-page center-align">' +
+        '<a href="index.html">' +
+        '<button type="button" class="sidebar-but"><img src="assets/img/icons/reset-icon.svg" alt="reset" class="reset-icon">' +
+        '<span>Reset Settings</span>' +
+        '</button>' +
+        '</a>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
+
+    feather.replace();
+    $("body").append(right_side_views);
 
     // Sidebar Visible
 
@@ -559,15 +1017,36 @@
 
     //Primary Skin one
 
+    $(document).on('change', '.primary-skin-one input', function () {
+        if ($(this).is(':checked')) {
+            $('.sidebar-menu').addClass('sidebar-menu-ten');
+        } else {
+            $('.sidebar-menu').removeClass('sidebar-menu-ten');
 
+        }
+    });
 
     //Primary Skin Two
 
+    $(document).on('change', '.primary-skin-two input', function () {
+        if ($(this).is(':checked')) {
+            $('.sidebar-menu').addClass('sidebar-menu-eleven');
+        } else {
+            $('.sidebar-menu').removeClass('sidebar-menu-eleven');
 
+        }
+    });
 
     //Primary Skin Three
 
+    $(document).on('change', '.primary-skin-three input', function () {
+        if ($(this).is(':checked')) {
+            $('.sidebar-menu').addClass('sidebar-menu-twelve');
+        } else {
+            $('.sidebar-menu').removeClass('sidebar-menu-twelve');
 
+        }
+    });
 
     $('.dropdown-trigger').dropdown({
         coverTrigger: false,
@@ -612,4 +1091,4 @@
 
 })(jQuery);
 
-	
+

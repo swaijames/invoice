@@ -6840,43 +6840,13 @@ body[data-layout-mode=dark] .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-o
     -ms-transition: ease all 0.8s;
 }
 
-.tooltip-five {
-    position: relative;
-    text-align: center;
-    margin: auto;
-}
+
 
 .sticky-sidebar > li > a:hover .feather-five {
     filter: invert(1) brightness(100);
 }
 
-.tooltip-five .tooltiptext {
-    visibility: hidden;
-    width: 126px;
-    background-color: #7638ff;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 111111;
-    top: 0px;
-    right: 41px;
-    font-size: 14px;
-    line-height: 18px;
-    text-transform: capitalize;
-}
 
-.tooltip-five .tooltiptext:after {
-    content: "";
-    position: absolute;
-    top: 49%;
-    left: 100%;
-    margin-top: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent transparent #7638ff;
-}
 
 .tooltip-five:hover .tooltiptext {
     visibility: visible;

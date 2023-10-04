@@ -10,39 +10,15 @@
                         <h3 class="page-title">CRM</h3>
 
                     </div>
-                    <div class="col-auto">
-                        <a href="add-customer.html" class="btn btn-primary me-1">
-                            <i class="fas fa-plus"></i>
-                        </a>
 
+                    <div class="btn-group me-2">
+                        <button href="#addClientModal" type="button" class="btn btn-primary" data-bs-toggle="modal">Add
+                            New Client
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <div id="filter_inputs" class="card filter-card">
-                <div class="card-body pb-0">
-                    <div class="row">
-                        <div class="col s12 m6 l3 ml-0">
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="col s12 m6 l3 ml-0">
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="text" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="col s12 m6 l3 ml-0">
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <input type="text" class="form-control"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col s12">
@@ -54,51 +30,48 @@
                                     <tr>
                                         <th>Customer</th>
                                         <th>Email</th>
-                                        <th>Amount Due</th>
+                                        <th>Address location</th>
                                         <th>Registered On</th>
-                                        <th>Status</th>
+                                        <th>Tax Number</th>
                                         <th class="right-align">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm me-2">
-                                                    <img class="avatar-img rounded-circle"
-                                                         src="{% static 'assets_dash/img/profiles/avatar-02.jpg' %}"
-                                                         alt="User Image"/>
+                                    {% for client in clients %}
+                                        <tr>
+                                            <td>
+                                                <h2 class="table-avatar">
+                                                    <a href="profile.html" class="avatar avatar-sm me-2">
+                                                        <img class="avatar-img rounded-circle"
+                                                             src="{{ client.clientLogo.url }}"
+                                                             alt="User Image"/>
+                                                    </a>
+                                                    <a href="profile.html">
+                                                        {{ client.clientName }}
+                                                        <span>{{ client.phoneNumber }}</span>
+                                                    </a>
+                                                </h2>
+                                            </td>
+                                            <td>
+                                                {{ client.emailAddress }}
+                                            </td>
+                                            <td>{{ client.addressLine1 }}</td>
+                                            <td>{{ client.date_created }}</td>
+                                            <td>
+                                                {{ client.taxNumber }}
+                                            </td>
+                                            <td class="right-align">
+                                                <a href="edit-customer.html"
+                                                   class="btn btn-sm btn-white text-success me-2">
+                                                    <i class="far fa-edit me-1"></i> Edit
                                                 </a>
-                                                <a href="profile.html">
-                                                    Brian Johnson
-                                                    <span>9876543210</span>
+                                                <a href="{% url 'delete-client' client.slug %}"
+                                                   class="btn btn-sm btn-white text-danger me-2">
+                                                    <i class="far fa-trash-alt me-1"></i> Delete
                                                 </a>
-                                            </h2>
-                                        </td>
-                                        <td>
-                                            <a href="https://kanakku.dreamguystech.com/cdn-cgi/l/email-protection"
-                                               class="__cf_email__"
-                                               data-cfemail="c0a2b2a9a1aeaaafa8aeb3afae80a5b8a1adb0aca5eea3afad">
-                                                [email&#160;protected]
-                                            </a>
-                                        </td>
-                                        <td>$295</td>
-                                        <td>16 Nov 2020</td>
-                                        <td>
-                                                    <span class="badge badge-pill bg-success-light">
-                              Active
-                            </span>
-                                        </td>
-                                        <td class="right-align">
-                                            <a href="edit-customer.html" class="btn btn-sm btn-white text-success me-2">
-                                                <i class="far fa-edit me-1"></i> Edit
-                                            </a>
-                                            <a href="javascript:void(0);" class="btn btn-sm btn-white text-danger me-2">
-                                                <i class="far fa-trash-alt me-1"></i> Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
 
                                     </tbody>
                                 </table>
@@ -109,4 +82,39 @@
             </div>
         </div>
     </div>
+
+
+
+    <div class="modal modal-sheet py-5" tabindex="-1" id="addClientModal">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-6 shadow">
+
+                <form class="" action="#" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title">Add new client</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body py-0">
+
+
+                        {{ form.as_p }}
+
+
+                    </div>
+                    <div class="modal-footer flex-column border-top-0">
+                        <button type="submit" class="btn btn-lg btn-primary w-100 mx-0 mb-2">Save changes</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}
