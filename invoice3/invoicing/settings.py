@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from django.contrib.messages import constants as messages
 import os
+import django_heroku
+import dj_database_url
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
@@ -132,6 +134,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+django_heroku.settings(locals())
 
 CSS_LOCATION = os.path.join(BASE_DIR, 'static')
 
